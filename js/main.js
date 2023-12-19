@@ -38,13 +38,37 @@ carouselCycle (carousel, cardContainer);
 // Creo l'evento per cui al click dei bottoni compaiano le immagini successive e precedenti
 buttonForward.addEventListener('click', function(){
 
-    // 
+    // Seleziono dal documento tutti gli elementi con classe 'active' e glie la rimuovo
     document.querySelector('.active').classList.remove('active');
 
     if (counter < carousel.length -1 ) {
         counter ++;
     } else {
         counter = 0;
+    }
+
+    /* AGGIUNBGO ACTIVE ALL'IMMAGINE DI INDICE counter E LO RIMUOVO DALLA CORRENTE*/
+    
+    // Dichiaro una Variabile con quale seleziono tutti gli elementi con classe 'card'
+    const myCards = document.querySelectorAll('.card');
+    console.log('array di card',myCards);
+
+    // Interpreto tutti gli elementi di classe 'card' come un array, di cui faccio corrispondere l'indice con il counter
+    myCards[counter].classList.add('active');
+    
+    console.log(counter); 
+
+})
+
+buttonBack.addEventListener('click', function(){
+
+    // Seleziono dal documento tutti gli elementi con classe 'active' e glie la rimuovo
+    document.querySelector('.active').classList.remove('active');
+
+    if ((counter !== carousel.length) && (counter !== 0)) {
+        counter --;
+    } else { 
+       counter = carousel.length -1;
     }
 
     /* AGGIUNBGO ACTIVE ALL'IMMAGINE DI INDICE counter E LO RIMUOVO DALLA CORRENTE*/
