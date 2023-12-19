@@ -33,5 +33,14 @@ html{
 
 #carousel-container img {
     max-width: 500px;
+    /* display: none; */
 }
 
+button {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.active {
+    display: block;
+}

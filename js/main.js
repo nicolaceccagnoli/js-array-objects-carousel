@@ -12,7 +12,16 @@
 
 */
 
+// Dichiaro una Variabile che prende dall'HTML il contenitore del carosello
+const carouselContainer = document.querySelector('#carousel-container');
 
+// Dichiaro le Variabili che prende dall'HTML i Bottoni
+const buttonForward = document.querySelector('#button-forward');
+const buttonBack = document.querySelector('#button-back');
+
+
+
+// Creo l'array contenente gli oggetti del mio Carosello
 const carousel = []
 
 carousel.push(createCarouselObj('http://www.viaggiareonline.it/wp-content/uploads/2014/11/sweden_148857365.jpg', 'Svezia', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam.'))
@@ -22,12 +31,15 @@ carousel.push(createCarouselObj('https://static1.evcdn.net/images/reduction/1583
 carousel.push(createCarouselObj('https://cdn.sanity.io/images/24oxpx4s/prod/ed09eff0362396772ad50ec3bfb728d332eb1c30-3200x2125.jpg?w=1600&h=1063&fit=crop' , 'Colombia', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam.'))
 
 console.log('Il mio carosello: ', carousel, typeof carousel);
+
+
 /*
 
     LE MIE FUNZIONI
 
 */
 
+// Creo la funzione che deve creare gli Oggetti che andranno nell'Array del Carosello
 function createCarouselObj (url, title, description) {
    myObject = {
         url: url,
