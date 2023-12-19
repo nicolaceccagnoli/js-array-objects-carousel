@@ -31,6 +31,11 @@ html{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+
+#carousel-container {
+    height: 800px;
+}
+
 .card{
     display: none;
 }
@@ -46,4 +51,9 @@ button {
 
 .active {
     display: block;
+}
+
+#thumbnail img{
+    width: 200px;
+    height: 100px;
 }

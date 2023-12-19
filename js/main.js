@@ -15,6 +15,8 @@
 // Dichiaro una Variabile che prende dall'HTML il contenitore del carosello
 const cardContainer = document.querySelector('#card-container');
 
+const thumbnail = document.querySelector('#thumbnail'); 
+
 // Dichiaro le Variabili che prende dall'HTML i Bottoni
 const buttonForward = document.querySelector('#button-forward');
 const buttonBack = document.querySelector('#button-back');
@@ -34,6 +36,8 @@ carousel.push(createCarouselObj('https://cdn.sanity.io/images/24oxpx4s/prod/ed09
 console.log('Il mio carosello: ', carousel, typeof carousel);
 
 carouselCycle (carousel, cardContainer);
+
+thumbnailPrint (carousel, thumbnail);
 
 let carouselForward = setInterval(intervalForward, 1000);
 
@@ -156,6 +160,20 @@ function carouselCycle (array, div) {
 
         div.innerHTML += myContent;
     });
+}
+
+
+function thumbnailPrint (array ,div) {
+
+    array.forEach((element, i) => {
+
+        div.innerHTML +=`
+                        <div>
+                            <img src=${array[i].url}>
+                        </div>
+                        `;
+    });
+
 }
 
 // Creo le Funzioni che definiscano l'intervallo che regola l'avanzamento del carosello
