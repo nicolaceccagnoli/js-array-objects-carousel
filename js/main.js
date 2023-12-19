@@ -4,8 +4,8 @@
         --  Come nel primo carosello realizzato, focalizziamoci prima sulla creazione del markup statico: costruiamo il container e inseriamo l'immagine grande in modo da poter stilare lo slider.     OK
 
     Milestone 1:
-        --  Ora rimuoviamo i contenuti statici e usiamo l'array di oggetti letterali per popolare dinamicamente il carosello.  
-        --  Al click dell'utente sulle frecce verso sinistra o destra, l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo. 
+        --  Ora rimuoviamo i contenuti statici e usiamo l'array di oggetti letterali per popolare dinamicamente il carosello.  OK
+        --  Al click dell'utente sulle frecce verso sinistra o destra, l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo. OK
 
     Milestone 2:
         --  Aggiungere il ciclo infinito del carosello. Ovvero se la slide attiva è la prima e l'utente clicca la freccia verso destra, la slide che deve attivarsi sarà l'ultima e viceversa per l'ultima slide se l'utente clicca la freccia verso sinistra.
@@ -19,6 +19,9 @@ const cardContainer = document.querySelector('#card-container');
 const buttonForward = document.querySelector('#button-forward');
 const buttonBack = document.querySelector('#button-back');
 
+// Creo una Variabile Contatore
+let counter = 0;
+
 // Creo l'array contenente gli oggetti del mio Carosello
 const carousel = []
 
@@ -30,20 +33,32 @@ carousel.push(createCarouselObj('https://cdn.sanity.io/images/24oxpx4s/prod/ed09
 
 console.log('Il mio carosello: ', carousel, typeof carousel);
 
-// Creo un ciclo che vada a stampare nel Contenitore le Immagini e le loro Descrizioni
-for (let i = 0; i < carousel.length; i++) {
+carouselCycle (carousel, cardContainer);
 
-    cardContainer.innerHTML += `
-                <div class="card" style="width: 18rem;">
-                    <img src=${carousel[i].url}>
-                    <div class="card-body">
-                        <h5 class="card-title">${carousel[i].title}</h5>
-                        <p class="card-text">${carousel[i].description}</p>
-                    </div>
-                </div>
-    `
-}
+// Creo l'evento per cui al click dei bottoni compaiano le immagini successive e precedenti
+buttonForward.addEventListener('click', function(){
 
+    // 
+    document.querySelector('.active').classList.remove('active');
+
+    if (counter < carousel.length -1 ) {
+        counter ++;
+    } else {
+        counter = 0;
+    }
+
+    /* AGGIUNBGO ACTIVE ALL'IMMAGINE DI INDICE counter E LO RIMUOVO DALLA CORRENTE*/
+    
+    // Dichiaro una Variabile con quale seleziono tutti gli elementi con classe 'card'
+    const myCards = document.querySelectorAll('.card');
+    console.log('array di card',myCards);
+
+    // Interpreto tutti gli elementi di classe 'card' come un array, di cui faccio corrispondere l'indice con il counter
+    myCards[counter].classList.add('active');
+    
+    console.log(counter); 
+
+})
 
 /*
 
@@ -53,6 +68,7 @@ for (let i = 0; i < carousel.length; i++) {
 
 // Creo la funzione che deve creare gli Oggetti che andranno nell'Array del Carosello
 function createCarouselObj (url, title, description) {
+
    myObject = {
         url: url,
         title: title,
@@ -60,3 +76,43 @@ function createCarouselObj (url, title, description) {
    }
     return myObject;
 }
+// Creo la funzione che contenga il ciclo che stampi le immagini nel Browser
+function carouselCycle (array, div) {
+
+    // Creo un ciclo che vada a stampare nel Contenitore le Immagini e le loro Descrizioni
+    // for (let i = 0; i < array.length; i++) {
+        
+    //     div.innerHTML += `
+    //                     <div class="card card-none" style="width: 50rem;">
+    //                         <img src=${array[i].url}>
+    //                         <div class="card-body">
+    //                             <h5 class="card-title">${array[i].title}</h5>
+    //                             <p class="card-text">${array[i].description}</p>
+    //                         </div>
+    //                     </div>
+    //                 `;
+    // }
+
+    // Definisco una Variabile che racchiuda la stampa in pagina
+    let myContent;
+    array.forEach((element, i) => {
+        myContent = `
+                        <div class="card`;
+        if(i == 0){
+            myContent += ' active';
+        }
+
+        myContent +=                
+        `" style="width: 50rem;">
+                            <img src=${array[i].url}>
+                            <div class="card-body">
+                                <h5 class="card-title">${array[i].title}</h5>
+                                <p class="card-text">${array[i].description}</p>
+                            </div>
+                        </div>
+                        `;
+
+        div.innerHTML += myContent;
+    });
+}
+
