@@ -13,13 +13,11 @@
 */
 
 // Dichiaro una Variabile che prende dall'HTML il contenitore del carosello
-const carouselContainer = document.querySelector('#carousel-container');
+const cardContainer = document.querySelector('#card-container');
 
 // Dichiaro le Variabili che prende dall'HTML i Bottoni
 const buttonForward = document.querySelector('#button-forward');
 const buttonBack = document.querySelector('#button-back');
-
-
 
 // Creo l'array contenente gli oggetti del mio Carosello
 const carousel = []
@@ -31,6 +29,20 @@ carousel.push(createCarouselObj('https://static1.evcdn.net/images/reduction/1583
 carousel.push(createCarouselObj('https://cdn.sanity.io/images/24oxpx4s/prod/ed09eff0362396772ad50ec3bfb728d332eb1c30-3200x2125.jpg?w=1600&h=1063&fit=crop' , 'Colombia', 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam.'))
 
 console.log('Il mio carosello: ', carousel, typeof carousel);
+
+// Creo un ciclo che vada a stampare nel Contenitore le Immagini e le loro Descrizioni
+for (let i = 0; i < carousel.length; i++) {
+
+    cardContainer.innerHTML += `
+                <div class="card" style="width: 18rem;">
+                    <img src=${carousel[i].url}>
+                    <div class="card-body">
+                        <h5 class="card-title">${carousel[i].title}</h5>
+                        <p class="card-text">${carousel[i].description}</p>
+                    </div>
+                </div>
+    `
+}
 
 
 /*

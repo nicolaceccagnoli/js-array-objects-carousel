@@ -31,9 +31,12 @@ html{
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#carousel-container img {
-    max-width: 500px;
+.card {
     /* display: none; */
+}
+
+.card img {
+    max-width: 900px;
 }
 
 button {
