@@ -39,7 +39,7 @@ carouselCycle (carousel, cardContainer);
 
 thumbnailPrint (carousel, thumbnail);
 
-let carouselForward = setInterval(intervalForward, 1000);
+// let carouselForward = setInterval(intervalForward, 1000);
 
 // let carouselBack = setInterval(intervalBack, 1000);
 
@@ -98,12 +98,37 @@ buttonBack.addEventListener('click', function(){
     const myCards = document.querySelectorAll('.card');
     console.log('array di card',myCards);
 
-    // Interpreto tutti gli elementi di classe 'card' come un array, di cui faccio corrispondere l'indice con il counter
+    // Interpreto tutti gli elementi di classe 'card' come un array, a cui faccio corrispondere l'indice con il counter
     myCards[counter].classList.add('active');
     
     console.log(counter); 
 
 })
+
+
+// Interpreto tutti gli elementi di classe 'thumbnail-img' come un array
+const thumbnailImg = document.querySelectorAll('.thumbnail-img');
+console.log(thumbnailImg);
+
+// Creo un ciclo che scorra gli elementi di classe 'thumbnail-img'
+for (let j = 0; j < thumbnailImg.length; j++) {
+
+    // Creo un evento per cui all'indice J dell'elemento con classe 'thumbnail-img' nel Contenitore delle Card venga stampata la card Corrispondente
+    thumbnailImg[j].addEventListener('click', function(){
+
+        cardContainer.innerHTML = `
+                                    <div class="card active" style="width: 50rem;">
+                                        <img src=${carousel[j].url}>
+                                        <div class="card-body">
+                                            <h5 class="card-title">${carousel[j].title}</h5>
+                                            <p class="card-text">${carousel[j].description}</p>
+                                        </div>
+                                    </div>
+                                `
+
+    })
+
+}
 
 /*
 
@@ -162,13 +187,24 @@ function carouselCycle (array, div) {
     });
 }
 
+/*
+
+`    <div class="card active" style="width: 50rem;">
+        <img src=${array[j].url}>
+        <div class="card-body">
+            <h5 class="card-title">${array[j].title}</h5>
+            <p class="card-text">${array[j].description}</p>
+        </div>
+    </div>
+`
+*/
 
 function thumbnailPrint (array ,div) {
 
     array.forEach((element, i) => {
 
         div.innerHTML +=`
-                        <div>
+                        <div class="thumbnail-img">
                             <img src=${array[i].url}>
                         </div>
                         `;
